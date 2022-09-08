@@ -61,7 +61,12 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `tail` __-__ Print the last 10 lines of a file, `tail -n $count$` for fixed lines count
 
+`>` __-__ Redirecting output to a file, **the file will be overwritten**
+
+`>>` __-__ Redirecting output to a file, **the output will be added to the existing content**
+
 `chmod` __-__ Change the permissions of a file or directory, `chmod +x`, `chmod -r`
+
 
 
 
