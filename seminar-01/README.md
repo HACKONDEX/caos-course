@@ -67,6 +67,12 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `chmod` __-__ Change the permissions of a file or directory, `chmod +x`, `chmod -r`
 
+`nano` __-__ An interactive file editor, `nano search.py`
+
+`find` __-__ Searches files and directories, `find [where to start searching] [options] [what to find]`
+
+`ping` __-__ Check to see if a server is alive,
+
 
 
 
