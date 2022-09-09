@@ -35,7 +35,7 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `rm` __-__ Delete file, `rm -r` __-__ Delete directory recursively
 
-`ls` __-__ List files and catalog in directory
+`ls` __-__ List files and catalogs in а directory
 
 <!-- *Options*
 
@@ -75,13 +75,16 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `sed` __-__ Edit streams, can perform many functions such as search, replace, delete, insert
 
-`ping` __-__ Check to see if a server is alive,
+`ping` __-__ Check to see if a server is alive
 
 
 ### <a name="terminal"></a> BASH
 -------------------------
 
 Bash script starts with line `#!/bin/bash` which tells OS to invoke the specified shell to execute the commands that follow in the script. The usual extension fo bash scrip is `.sh`, since many bash scripts don't have a file extension, any executable "plaintext" file that contains the text `#!/bin/bash` within the first line of the file will also be interpreted as a bash script.
+
+_**Basic syntax and examples**_
+
 - Hello world on BASH
 -----------------------
 
@@ -97,10 +100,10 @@ Bash script starts with line `#!/bin/bash` which tells OS to invoke the specifie
 
     variable=-1
     echo $variable
-    if (( $variable > 0 ))
+    if (($variable > 0))
     then
         echo "Positive"
-    elif (( $variable < 0 && $variable > -2 ))
+    elif (($variable < 0 && $variable > -2))
     then
         echo "In interval (-2, 0)"
     else
@@ -119,7 +122,7 @@ Bash script starts with line `#!/bin/bash` which tells OS to invoke the specifie
     #! /bin/bash
 
     sum=0
-    for (( i=0; i <= 10; i++ ))
+    for ((i=0; i <= 10; i++))
     do
         sum=$(($i + $sum))
     done
@@ -148,22 +151,54 @@ Bash script starts with line `#!/bin/bash` which tells OS to invoke the specifie
     declare -A matrix
 
     n=2
-    for (( i=0; i < $n; i++ ))
+    for ((i=0; i < $n; i++))
     do
-        for (( j=0; j < $n; ++j ))
+        for ((j=0; j < $n; ++j))
         do
             read num
             matrix[$i, $j]=$num
         done
     done
 
-    for (( i=0; i < $n; i++ ))
+    for ((i=0; i < $n; i++))
     do
-        for (( j=0; j < $n; ++j ))
+        for ((j=0; j < $n; ++j))
         do
             echo -n "${matrix[$i, $j]} "
         done
     echo ""
     done
+
+- Functions
+-------------------------------------------
+
+    #! /bin/bash
+
+    function calc_remains_fast() {
+        echo $(($1 - $(($(($1 / $2)) * $2))))
+    }
+
+    function calc_remains_slow() {
+        local n=$1
+        local m=$2
+        local r=0
+        while (($n > 0))
+        do
+            if (($n < $m))
+            then
+                r=$n
+                break
+            else
+                n=$(($n - $m))
+            fi
+        done
+        echo $r
+    }
+
+    remains_fast=$(calc_remains_fast 21 5)
+    echo $remains_fast
+    remains_slow=$(calc_remains_slow 117 9)
+    echo $remains_slow
+
 
 
