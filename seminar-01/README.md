@@ -61,7 +61,7 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 ---------------------------------------
 
-`ps` __-__ Lists of running processes, `ps aux` for more detailed list
+`ps` __-__ Print list of running processes, `ps aux` for more detailed list
 
 `top` __-__ Interactive process monitoring
 
