@@ -23,9 +23,9 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `pwd` __-__ Print current directory
 
-`cd`  __-__ Change the current directory:
+`cd`  __-__ Change the current directory
 
-`mkdir` __-__ Create a new directory:
+`mkdir` __-__ Create a new directory
 
 `touch` __-__ Create a new file
 
@@ -71,8 +71,11 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `find` __-__ Searches files and directories, `find [where to start searching] [options] [what to find]`
 
-`ping` __-__ Check to see if a server is alive,
+`grep` __-__ Search for a string in groups of files.
 
+`sed` __-__ Edit streams, can perform many functions such as search, replace, delete, insert
+
+`ping` __-__ Check to see if a server is alive,
 
 
 
