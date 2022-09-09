@@ -37,22 +37,6 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 
 `ls` __-__ List files and catalogs in а directory
 
-<!-- *Options*
-
-    ls -l
-
-<img src="lsl.png" width="450"  height="40" align="centre" alt="Видео с семинара"> 
-
------
-    ls -a
-
-<img src="lsa.png" width="450"  height="20" align="centre" alt="Видео с семинара"> 
-
-------
-    ls -la
-
-<img src="lsla.png" width="450"  height="80" align="centre" alt="Видео с семинара">  -->
-
 --------------------------------------
 
 `cat` __-__ Print the contents of a file
@@ -74,6 +58,18 @@ You can read more in Russian in [Yakovlev's reading](https://github.com/victor-y
 `grep` __-__ Search for a string in groups of files.
 
 `sed` __-__ Edit streams, can perform many functions such as search, replace, delete, insert
+
+---------------------------------------
+
+`ps` __-__ Lists of running processes, `ps aux` for more detailed list
+
+`top` __-__ Interactive process monitoring
+
+`pidof` __-__ Shows __PID__ of processes connected with given name
+
+`kill` __-__ Kills the process with given __PID__
+
+`killall` __-__ Kill all processes connected with given name
 
 `ping` __-__ Check to see if a server is alive
 
