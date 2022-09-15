@@ -1,4 +1,4 @@
-# Introduction:  Linux, terminal, Bash, C
+# Introduction:  Linux, terminal, Bash
 
 
 Linux is a family of open-source Unix-like operating systems based on the Linux kernel.
@@ -195,6 +195,4 @@ _**Basic syntax and examples**_
     echo $remains_fast
     remains_slow=$(calc_remains_slow 117 9)
     echo $remains_slow
-
-
 
