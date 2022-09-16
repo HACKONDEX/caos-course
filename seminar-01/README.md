@@ -1,4 +1,4 @@
-# Introduction:  Linux, terminal, Bash
+# Sem1: Introduction to linux, terminal, bash
 
 
 Linux is a family of open-source Unix-like operating systems based on the Linux kernel.
