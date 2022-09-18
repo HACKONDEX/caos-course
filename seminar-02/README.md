@@ -1,11 +1,12 @@
 <div class="cell markdown">
 
-# C, GCC, Makefile, GDB
+# C, GCC, Makefile
 
   - `C` is a compiled language, its programm file must have `.c`
     extension
-  - There are many `C` compilers, most popular ones for linux are 1) GCC
-    2) Clang
+  - There are many `C` compilers, most popular ones for linux are 
+  1) GCC
+  2) Clang
   - In our course we will use `GCC`
 
 </div>
@@ -24,8 +25,6 @@ int main() {
 ```
 
 <div class="output stream stdout">
-
-    Overwriting hello_world.c
 
 </div>
 
@@ -68,12 +67,14 @@ expansion, conditional compilation
 
 3\) Assembling **:** convertion into a machine-understandable code
 
-## 4\) Linking **:** generates an executable file
+4\) Linking **:** generates an executable file
 
   - [Small article about
     compilation](https://www.scaler.com/topics/c/compilation-process-in-c/)
 
 </div>
+
+--------------------
 
 <div class="cell markdown">
 
@@ -111,9 +112,6 @@ int convert_euros_to_rubles(int* amount) {
 ```
 
 <div class="output stream stdout">
-
-    Overwriting preprocess_example.h
-
 </div>
 
 </div>
@@ -144,8 +142,6 @@ int count() {
 ```
 
 <div class="output stream stdout">
-
-    Overwriting preprocess_example.c
 
 </div>
 
@@ -218,7 +214,7 @@ int count() {
   - It is an intermediate human readable language, **specific to the
     target processor** .
 
-  - ## Assembly file must have `.S` extension.
+  - Assembly file must have `.S` extension.
 
   - `-S` option for generating file right after **compilation** step.
 
@@ -257,8 +253,6 @@ int main() {
 ```
 
 <div class="output stream stdout">
-
-    Overwriting asm_example.c
 
 </div>
 
@@ -573,8 +567,6 @@ int gcd(int x, int y);
 
 <div class="output stream stdout">
 
-    Writing gcd.h
-
 </div>
 
 </div>
@@ -600,8 +592,6 @@ int gcd(int x, int y) {
 
 <div class="output stream stdout">
 
-    Writing gcd.c
-
 </div>
 
 </div>
@@ -620,8 +610,6 @@ int main() {
 ```
 
 <div class="output stream stdout">
-
-    Overwriting calculate_gcd.c
 
 </div>
 
@@ -663,7 +651,7 @@ int main() {
 
   - `-Werror` option make all warning mesages into error messages.
 
-  - `Wfatal-errors` option causes the compiler to abort compilation on
+  - `-Wfatal-errors` option causes the compiler to abort compilation on
     the first error.
 
   - `-E` option to generate `.c` or `.i` file which will include the
@@ -700,8 +688,6 @@ int main() {
 
 <div class="output stream stdout">
 
-    Overwriting option.c
-
 </div>
 
 </div>
@@ -736,9 +722,9 @@ int main() {
     delete files and more.
 
   - To use utility `make` you need to install it and write a file, which
-    must strictly have name `Makefile`.
+    must be named `Makefile`.
 
-  - in `Makefile` we have **targets** and **dependencies**
+  - In `Makefile` we have **targets** and **dependencies**
 
 Here is a template view of **Makefile**
 
@@ -791,8 +777,6 @@ clear:
 ```
 
 <div class="output stream stdout">
-
-    rm -f hello_world.exe > /dev/null
 
 </div>
 
