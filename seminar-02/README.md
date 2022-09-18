@@ -13,7 +13,7 @@
 
 <div class="cell code" data-execution_count="34">
 
-``` python
+``` c
 %%file hello_world.c
 
 #include <stdio.h>
@@ -39,7 +39,7 @@ int main() {
 
 <div class="cell code" data-execution_count="35">
 
-``` python
+``` cpp
 !gcc hello_world.c -o hello_world.exe
 !./hello_world.exe
 ```
@@ -118,7 +118,7 @@ int convert_euros_to_rubles(int* amount) {
 
 <div class="cell code" data-execution_count="37">
 
-``` python
+``` c
 %%file preprocess_example.c
 #include "preprocess_example.h"
 
@@ -222,7 +222,7 @@ int count() {
 
 <div class="cell code" data-execution_count="39">
 
-``` python
+``` c
 %%file asm_example.c
 #include <limits.h>
 #include <stdio.h>
@@ -559,7 +559,7 @@ count:
 
 <div class="cell code" data-execution_count="1">
 
-``` python
+``` c
 %%file gcd.h
 
 int gcd(int x, int y);
@@ -573,7 +573,7 @@ int gcd(int x, int y);
 
 <div class="cell code" data-execution_count="2">
 
-``` python
+``` c
 %%file gcd.c
 #include "gcd.h"
 
@@ -598,7 +598,7 @@ int gcd(int x, int y) {
 
 <div class="cell code" data-execution_count="5">
 
-``` python
+``` c
 %%file calculate_gcd.c
 #include "gcd.h"
 #include <stdio.h>
@@ -676,7 +676,7 @@ int main() {
 
 <div class="cell code" data-execution_count="15">
 
-``` python
+``` c
 %%file option.c
 #include <stdio.h>
 
