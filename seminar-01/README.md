@@ -196,3 +196,10 @@ _**Basic syntax and examples**_
     remains_slow=$(calc_remains_slow 117 9)
     echo $remains_slow
 
+------------------------
+
+## **Useful commands**
+
+- `grep -Fx -f file1 file2` - find intersection of two files.
+
+- `readelf -WaS file` - print content of **ELF** file in readable format.
