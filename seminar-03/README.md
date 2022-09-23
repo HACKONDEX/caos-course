@@ -167,6 +167,17 @@ Unsigned integer types
    
  </font>
 
+     Type     memory(bytes)      Max                 Min
+    int8_t          1            127                -128
+    int16_t         2           32767              -32768
+    int32_t         4         2147483647         -2147483648
+    int64_t         8     9223372036854775807 -9223372036854775808
+----------------
+    uint8_t         1            255                  0
+    uint16_t        2           65535                 0
+    uint32_t        4         4294967295              0
+    uint64_t        8     18446744073709551615        0
+
 <font size="6"> 
 
 Bitwise operations
