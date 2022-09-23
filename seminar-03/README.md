@@ -32,7 +32,7 @@ Arithmetics, Integers & floats
     
 <font size="4"> 
 
-You can find out types memory size using `sizeof()` in you code.
+You can find out type's memory size using `sizeof()` in your code.
 
 </font> 
 
