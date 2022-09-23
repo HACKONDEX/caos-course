@@ -130,10 +130,8 @@ int main() {
 
 <div class="output stream stdout">
 
-    Maximum value of  char:  127
-    Minimum value of  char:  -128
-    Maximum value of  long long:  9223372036854775807
-    Minimal value of  long long:  -9223372036854775808
+    Maximum value of  int:  127
+    Minimum value of  int:  -128
     Maximum value of  int:  2147483647
     Minimum value of  int:  -2147483648
     Maximum value of  long long:  9223372036854775807
