@@ -119,8 +119,6 @@ To use maximal and minimal values of different types, use defines from `<limits.
 int main() {
     printf("Maximum value of  char:  %d\n", CHAR_MAX);
     printf("Minimum value of  char:  %d\n", CHAR_MIN);
-    printf("Maximum value of  long long:  %lld\n", LLONG_MAX);
-    printf("Minimal value of  long long:  %lld\n", LLONG_MIN);
     printf("Maximum value of  int:  %d\n", INT_MAX);
     printf("Minimum value of  int:  %d\n", INT_MIN);
     printf("Maximum value of  long long:  %lld\n", LLONG_MAX);
