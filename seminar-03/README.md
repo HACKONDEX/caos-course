@@ -166,3 +166,78 @@ Unsigned integer types
     
    
  </font>
+
+<font size="6"> 
+
+Bitwise operations
+====================
+
+- Bitwise operations are defined for __positive__ operands. For __negative__ operands operators have undefined behavior. The result for positive operands of signed integer types is implementation defined.
+  
+- You should use **bitwise operations** only for unsigned integer types not to get in trap. Even with "negative zero" can be problems.
+  
+### Operations
+
+- `&` __-__ does **AND** on every bit of two numbers. The result of **AND** is 1 only if both bits are 1.
+
+- `|` __-__ does **OR** on every bit of two numbers. The result of **OR** is 1 if any of the two bits is 1. 
+
+- `^` __-__ does **XOR** on every bit of two numbers. The result of **XOR** is 1 if the two bits are different. 
+
+- `~` __-__ **inverts** all bits of the number;
+ 
+- `<<` __-__ **left** shifts the bits of the first operand, the second operand decides the number of places to shift. 
+
+- `>>` __-__ **right** shifts the bits of the first operand, the second operand decides the number of places to shift. 
+
+Integer overflow
+==========
+
+- In `C` only for unsigned types overflow is defined. If After some arithmetic operation the value is bigger than the possible maximum of the type, it will return the value as in ring **Z**<sub>MAX_VALUE</sub>.
+
+</font>
+
+```C
+%%file overflow.c
+#include <inttypes.h>
+#include <limits.h>
+#include <stdio.h>
+
+int check_signed(int x) {
+    return (x + 1) > x;
+}
+
+int check_unsigned(unsigned int x) {
+    return (x + 1) > x;
+}
+
+int main() {
+    printf("check unsigned for UINTMAX returned  %d\n", check_unsigned(UINT_MAX));
+
+    int64_t value = INT64_MAX;
+    printf("INT64_MAX + 1 == %" PRId64 "\n", value + 1);
+    ++value;
+    printf("after increment value == %" PRId64 "\n", value);
+
+    uint64_t uint_value = 0;
+    printf("uint 0 - 1 == %" PRIu64 "\n", uint_value - 1u);
+    --uint_value;
+    printf("uint 0 after decrement == %" PRIu64 "\n", uint_value);
+
+    printf("check signed for INTMAX returned  %d\n", check_signed(INT_MAX));
+
+    return 0;
+}
+```
+
+<div class="output stream stdout">
+
+    check unsigned for UINTMAX returned  0
+    INT64_MAX + 1 == -9223372036854775808
+    after increment value == -9223372036854775808
+    uint 0 - 1 == 18446744073709551615
+    uint 0 after decrement == 18446744073709551615
+    check signed for INTMAX returned  1
+
+</div>
+
