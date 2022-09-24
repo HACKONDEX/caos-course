@@ -252,3 +252,22 @@ int main() {
 
 </div>
 
+
+ </font>
+
+# floats & doubles
+
+
+|s|[|Exp|]|[|Mantis|]|<center>Type</center>|
+|-|-|---|-|-|------|-|--------|
+|0|0|.......|0|0|... ... ... ...|0|<center>__PlusZero__</center>|
+|1|0|.......|0|0|... ... ... ...|0|<center>__MinusZero__</center>|
+|0|0|.......|0|x|... ... ... ...|x|<center>__PlusDenormalized__</center>|
+|1|0|.......|0|x|... ... ... ...|x|<center>__MinusDenormalized__</center>|
+|0|1|.......|1|0|... ... ... ...|0|<center>__PlusInf__</center>|
+|1|1|.......|1|0|... ... ... ...|0|<center>__MinusInf__</center>|
+|x|1|.......|1|1|x.. ... ... ..x|x|<center>__QuietNaN__</center>|
+|x|1|.......|1|0|... ... ... ...|x|<center>__SignalingNaN__</center>|
+
+
+<font size="6"> 
