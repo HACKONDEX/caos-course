@@ -259,7 +259,7 @@ int main() {
 
 - __float__ in memory occupies __`32`__ bits
   
-  - Three abstract parts starting from most signigicant byte
+  - Three abstract parts starting from most significant byte
     
     1. Sign **-** __`1`__ bit
     2. Exponenta **-** __`8`__ bits
@@ -269,7 +269,7 @@ int main() {
 
 - __double__ in memory occupies at *least* __`32`__ bits, __`64`__ on Intel_x86_64 
 
-  - Three abstract parts starting from most signigicant byte
+  - Three abstract parts starting from most significant byte
     
     1. Sign **-** __`1`__ bit
     2. Exponenta **-** __`11`__ bits
