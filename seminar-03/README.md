@@ -253,21 +253,45 @@ int main() {
 </div>
 
 
- </font>
+<font size="6"> 
 
 # floats & doubles
 
+- __float__ in memory occupies __`32`__ bits
+  
+  - Three abstract parts starting from most signigicant byte
+    
+    1. Sign **-** __`1`__ bit
+    2. Exponenta **-** __`8`__ bits
+    3. Mantissa **-** __`23`__ bits
 
-|s|[|Exp|]|[|Mantis|]|<center>Type</center>|
-|-|-|---|-|-|------|-|--------|
-|0|0|.......|0|0|... ... ... ...|0|<center>__PlusZero__</center>|
-|1|0|.......|0|0|... ... ... ...|0|<center>__MinusZero__</center>|
-|0|0|.......|0|x|... ... ... ...|x|<center>__PlusDenormalized__</center>|
-|1|0|.......|0|x|... ... ... ...|x|<center>__MinusDenormalized__</center>|
-|0|1|.......|1|0|... ... ... ...|0|<center>__PlusInf__</center>|
-|1|1|.......|1|0|... ... ... ...|0|<center>__MinusInf__</center>|
-|x|1|.......|1|1|x.. ... ... ..x|x|<center>__QuietNaN__</center>|
-|x|1|.......|1|0|... ... ... ...|x|<center>__SignalingNaN__</center>|
+    - Counting formula **:**  &nbsp; (-1)<sup>_S_</sup> 2<sup>*E* - 2<sup>(*b* - 1)</sup>+1</sup>(1+*M*/2<sup>23</sup>), where _b_ is a constant shift defined for processor
+
+- __double__ in memory occupies at *least* __`32`__ bits, __`64`__ on Intel_x86_64 
+
+  - Three abstract parts starting from most signigicant byte
+    
+    1. Sign **-** __`1`__ bit
+    2. Exponenta **-** __`11`__ bits
+    3. Mantissa **-** __`52`__ bits
+    - Counting formula **:** &nbsp;  (-1)<sup>_S_</sup> 2<sup>_E_ - 2<sup>(*b* - 1)</sup>+1</sup>(1+*M*/2<sup>52</sup>), where _b_ is a constant shift defined for processor
 
 
-<font size="6"> 
+### Not regular float and double values
+
+
+|_S_|[|_Exp_|]|[|_Mantissa_|]|<center>_Type_</center>|
+|-|-|---|-|-|------|-|---------------------|
+|0|0|.......|0|0|... ... ... ... ...|0|<center>__PlusZero__</center>|
+|1|0|.......|0|0|... ... ... ... ...|0|<center>__MinusZero__</center>|
+|0|0|.......|0|x|... ... ... ... ...|x|<center>__PlusDenormalized__</center>|
+|1|0|.......|0|x|... ... ... ... ...|x|<center>__MinusDenormalized__</center>|
+|0|1|.......|1|0|... ... ... ... ...|0|<center>__PlusInf__</center>|
+|1|1|.......|1|0|... ... ... ... ...|0|<center>__MinusInf__</center>|
+|x|1|.......|1|1|x. ... ... ... .x|x|<center>__QuietNaN__</center>|
+|x|1|.......|1|0|x. ... ... ... .x|x|<center>__SignalingNaN__</center>|
+
+
+ </font>
+
+
