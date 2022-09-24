@@ -292,6 +292,8 @@ int main() {
 |x|1|.......|1|0|x. ... ... ... .x|x|<center>__SignalingNaN__</center>|
 
 
+- You can read more details in [IEEE 754](http://www.softelectro.ru/ieee754.html)
+
  </font>
 
 
