@@ -1,8 +1,16 @@
 # __ASM ARM__
 
 - If your computer's processor is not `ARM` architecture, you should install some additional tools for running binary code
-  
+
+ <font size="6"> 
+
+### Note
+
+- If you have problems with your linux, have MacBook with M1/M2 or  don't want to starve you can use [GodBolt](https://godbolt.org). Just choose there language _Assembly_ and _ARM gcc_ compiler.
+
 ## Install instructions
+
+</font> 
 
 1. Download compilers and dynamic libraries
 
@@ -47,3 +55,5 @@
 
    - qemu-arm ./program.exe
 
+
+- If you have problems with your linux, have MacBook with M1/M2 or  don't want to starve you can use [GodBolt](https://godbolt.org). Just choose there language _Assembly_ and _ARM gcc_ compiler
