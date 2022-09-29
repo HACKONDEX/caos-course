@@ -54,6 +54,3 @@
    - arm-linux-gnueabi-gcc -marm -S -O3 lib.c -o lib.S
 
    - qemu-arm ./program.exe
-
-
-- If you have problems with your linux, have MacBook with M1/M2 or  don't want to starve you can use [GodBolt](https://godbolt.org). Just choose there language _Assembly_ and _ARM gcc_ compiler
