@@ -122,3 +122,26 @@ mul_add:
 	bx	lr
 
 ```
+
+## ARM calling convention
+
+|_Registers_| _Function_ |_Value saved during call_|
+|-----------|------------|-------------------------|
+|__r0-r3__  |arguments/return values| __NO__|
+|__r4-r11__ |local variables|__YES__|
+|__r12(ip)__|intra-procedure-call scratch|__NO__|
+|__r13(sp)__|stack pointer|__YES__|
+|__r14(lr)__|link register|__NO__|
+|__r15(pc)__|programme counter|__NO__|
+
+- `pc` keeps the address of current running instruction
+ 
+- `lr` holds the return address for a function call
+ 
+- `sp` holds the address of current stack border
+
+- First *4* arguments of function are in registers __r0-r3__, all other arguments are given through stack
+
+- Function return value is in __r0__ or __r0-r1__
+
+- Function call can't change values of registers __r4-r11__, so if you want to use them in your function, you should save them on stack before using
