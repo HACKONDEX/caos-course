@@ -54,3 +54,13 @@
    - arm-linux-gnueabi-gcc -marm -S -O3 lib.c -o lib.S
 
    - qemu-arm ./program.exe
+
+## Assembly code
+
+- Get assembly code of your programme on `C` with option `-S`
+  
+`arm-linux-gnueabi-gcc -S -marm example.c -o example.S`
+
+- Use option `-Os` for getting more readable asm code
+
+`arm-linux-gnueabi-gcc -S -Os -marm example.c -o example.S`
