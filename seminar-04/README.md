@@ -64,3 +64,61 @@
 - Use option `-Os` for getting more readable asm code
 
 `arm-linux-gnueabi-gcc -S -Os -marm example.c -o example.S`
+
+- Or, if you already have object file of your code
+
+`arm-linux-gnueabi-gcc -c -Os -marm example.c -o example.o`
+
+- Then, just look at its objdump
+  
+`arm-linux-gnueabi-objdump -D example.o`
+
+- Example
+
+```C
+%file example.c
+
+int sum(int x, int y) {
+	return x + y;
+}
+
+int sum3(int a, int b, int c) {
+	return a + b + c;
+}
+
+int mul(int x, int y) {
+	return x * y;
+}
+
+int mul_add(int a, int b, int c) {
+	return a * b + c;
+}
+```
+
+- Of course, after compiling into asm code, we will have a lot of additional instructions and code lines, as it is created by machine. Here you can see the most significant parts
+
+```ASM
+
+   .global	sum
+   .global	sum3
+   .global	mul
+   .global	mul_add
+
+sum:
+	add	r0, r0, r1
+	bx	lr
+
+sum3:
+	add	r0, r0, r1
+	add	r0, r0, r2
+	bx	lr
+
+mul:
+	mul	r0, r1, r0
+	bx	lr
+
+mul_add:
+	mla	r0, r1, r0, r2
+	bx	lr
+
+```
