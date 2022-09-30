@@ -93,32 +93,33 @@ int mul_add(int a, int b, int c) {
 - Of course, after compiling into asm code, we will have a lot of additional instructions and code lines, as it is created by machine. Here you can see the most significant parts
 
 ```ASM
-
+   .text
    .global	sum
    .global	sum3
    .global	mul
    .global	mul_add
 
 sum:
-	add	r0, r0, r1
-	bx	lr
+	add	w0, w0, w1
+	ret
 
 sum3:
-	add	r0, r0, r1
-	add	r0, r0, r2
-	bx	lr
+	add	w0, w0, w1
+	add	w0, w0, w2
+	ret
 
 mul:
-	mul	r0, r1, r0
-	bx	lr
+	mul	w0, w0, w1
+	ret
 
 mul_add:
-	mla	r0, r1, r0, r2
-	bx	lr
+	madd	w0, w0, w1, w2
+	ret
+
 
 ```
 
-## ARM calling convention
+## Calling convention
 
 |_Registers_| _Function_ |_Value saved during call_|
 |-----------|------------|-------------------------|
