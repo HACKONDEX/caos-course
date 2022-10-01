@@ -121,6 +121,44 @@ mul_add:
 
 ## Calling convention
 
+
+### <center>AArch64(armv8(arm64))</center>
+
+<center>
+
+|_Registers_| _Function_ |_Value saved during call_|
+|-----------|------------|-------------------------|
+|__x0-x7__  |arguments/return values| __NO__|
+|__x8-x15__ |local variables, scratch registers|__NO__|
+|__x16-x17__|intra-procedure-call scratch|__NO__|
+|__x18__|platform register|__NO__|
+|__x19-x28__|scratch registers|__YES__|
+|__x29(fp)__|frame pointer|__YES__|
+|__x30(lr)__|procedure link register|__YES__|
+|__sp__|stack pointer|__NO__|
+|__pc__|programm counter|__NO__|
+
+</center>
+
+- `pc` keeps the address of current running instruction, isn't indexed register, has limited access 
+ 
+- `lr` holds the return address for a function call
+ 
+- `sp` holds the address of current stack border, isn't indexed register, has limited access
+  
+- `fp` required for compatibility with fast stack walking
+
+- First *8* arguments of function are in registers __x0-x7__, all other arguments are given through stack
+
+- Function return value is in __x0__ or __x0-x1__
+
+- Function call can't change values of registers __x19-x28__, so if you want to use them in your funtion, you should save them on stack before using
+
+
+      You can compare arm32 with aarch64
+
+### <center>Arm 32</center>
+
 |_Registers_| _Function_ |_Value saved during call_|
 |-----------|------------|-------------------------|
 |__r0-r3__  |arguments/return values| __NO__|
