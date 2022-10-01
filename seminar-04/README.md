@@ -14,19 +14,22 @@
 
 1. Install aarch-64 gcc compiler
 
-`sudo apt update && sudo apt upgrade`
-
-`sudo apt --fix-broken install`
-
-`sudo apt-get install gcc-aarch64-linux-gnu`
+----
+      sudo apt update && sudo apt upgrade
+----
+      sudo apt --fix-broken install
+----
+      sudo apt-get install gcc-aarch64-linux-gnu
+----
 
 2. Install qemu-arm if haven't got already
 
-`apt-get install qemu-system-arm`
-
-`apt-get install qemu-efi-aarch64`
-
-`apt-get install qemu-utils`
+----
+      apt-get install qemu-system-arm
+----
+      apt-get install qemu-efi-aarch64
+----
+      apt-get install qemu-utils
 
 3. If you have problems with compilation and execution, just search in google the error message. You will find solution for your problem in *99%* of cases.
 
