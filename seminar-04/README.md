@@ -201,13 +201,11 @@ mul_add:
 
 - __`mov`__ move `move x$, #1` **-** copies from second operand into first
 
-- __`add`__ add without carry `add x0, x1, x2` **-** count sum of `x1` and `x2`, save result in `x0`
+- __`add`__ add without carry `add x0, x1, x2` **-** counts sum of `x1` and `x2`, save result in `x0`
+
+- __`sub`__ sub without carry `sub x0, x1, x2` **-** subtracts `x2` from `x1` and saves result in `x0`
 
 - __`mul`__ Multiply operands, giving the least significant 32 bits of the result `mul x0, x1, x2` **-** multiply `x1` and `x2`, save result in `x0`
-
-- __`ldr`__ load `ldr x0, [x1]` **-** load into from variable by address in `x1`
-
-- __`str`__ save `str x0, [x1]` **-** save data from register `x0` in memory cell with address in register `x1`
 
 - __`cmp`___ compare `cmp x0, x1` **-** compare `x0` and `x1` and set relevant flags
 
@@ -264,8 +262,11 @@ func:
 
 ```
 
+- __`ldr`__ load `ldr x0, [x1]` **-** load into from variable by address in `x1`
 
+- __`str`__ save `str x0, [x1]` **-** save data from register `x0` in memory cell with address in register `x1`
 
-- __`mla`__ multiply and add `mla r0, r1, r2, r3` **-** multiplye `r1` and `r2` then add `r3` and save result in `r0`
+- __`adr`__ from relative address `adr x0, label` stores in register `x0` address of the `label`
+ 
 
 
