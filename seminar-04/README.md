@@ -191,19 +191,80 @@ mul_add:
 
 #### Main instructions
 
-- __`bx`__ branch and exchange `bx r$` **-** branch to the address contained in register `r$` and exchange the instruction set.
+- __`b`__ branch by label `b Label` **-** branch to the address of `Label`
 
-- __`mov`__ move `move r$, #1` **-** copies from second operand into first
+- __`bl`__ branch by label `bl Label` **-** branch to the address of `Label`, and save the address right after `bl Lable` in `lr` register, to be able to return using instruction `ret`
 
-- __`ldr`__ load `ldr r0, [r1]` **-** load into from variable by address in `r1`. `ldr r0, [r1, ]
+- __`br` branch by address `br x$` **-** branch to the address contained in register `x$`
 
-- __`cmp`___ compare `cmp r0, r1` **-** compare `r0` and `r1` and set relevant flags
+- __`brl` branch by address `brl x$` **-** branch to the address contained in register `x$`, and save the address right after `brl x$` in `lr` register, to be able to return using instruction `ret`
 
-- __`add`__ add without carry `add r0, r1, r2` **-** count sum of `r1` and `r2`, save result in `r0`
+- __`mov`__ move `move x$, #1` **-** copies from second operand into first
 
-- __`rsb`__ Reverse Subtract without carry `rsb r0, r1, r2` **-** subtracs `r1` from `r2` and save esult in `r0`
+- __`add`__ add without carry `add x0, x1, x2` **-** count sum of `x1` and `x2`, save result in `x0`
 
-- __`mul`__ Multiply operands, giving the least significant 32 bits of the result `mul r0, r1, r2` **-** multiply `r1` and `r2`, save result in `r0`
+- __`mul`__ Multiply operands, giving the least significant 32 bits of the result `mul x0, x1, x2` **-** multiply `x1` and `x2`, save result in `x0`
+
+- __`ldr`__ load `ldr x0, [x1]` **-** load into from variable by address in `x1`
+
+- __`str`__ save `str x0, [x1]` **-** save data from register `x0` in memory cell with address in register `x1`
+
+- __`cmp`___ compare `cmp x0, x1` **-** compare `x0` and `x1` and set relevant flags
+
+#### Check presence of flag using suffixes
+
+- __`eq`__ **-** equal
+
+- __`ne`__ **-** not equal
+
+- __`ge`__ **-** greater than or equal
+
+- __`le`__ **-** less than or equal
+
+- __`gt`__ **-** greater than
+
+- __`lt`__ **-** less than
+
+##### Examples
+
+```C
+%file compare.c
+
+long long func(long long x, long long y) {
+    if (x < y) {
+        return y == 7 ? x + 1 : x * 2;
+    }
+    if (x == y + 1) {
+        return 21;
+    }
+    return x + y;
+}
+```
+      aarch64-linux-gnu-gcc -S -Os compare.c -o compare.S
+
+```ASM
+
+	.text
+	.global	func
+func:
+	cmp	x0, x1
+	bge	.L2
+	add	x0, x1, 7
+
+.L1:
+	ret
+
+.L2:
+	add	x2, x1, 1
+	add	x1, x0, x1
+	cmp	x2, x0
+	mov	x0, 21
+	csel	x0, x1, x0, ne
+	b	.L1
+
+```
+
+
 
 - __`mla`__ multiply and add `mla r0, r1, r2, r3` **-** multiplye `r1` and `r2` then add `r3` and save result in `r0`
 
