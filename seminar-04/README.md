@@ -1,5 +1,6 @@
 # __ASM AArch64__
 
+
 - If your computer's processor is not `ARM` architecture, you should install some additional tools for running binary code
 
  <font size="6"> 
@@ -7,6 +8,8 @@
 ### Note
 
 - If you have problems with your linux, have MacBook with M1/M2 or  don't want to starve you can use [GodBolt](https://godbolt.org). Just choose there language _Assembly_ and _AArch64_ compiler.
+
+- Also read [Yakovlev's reading](https://github.com/victor-yacovlev/fpmi-caos/tree/master/practice/aarch64) for better understanding
 
 ## Install instructions
 
@@ -160,7 +163,11 @@ mul_add:
 
       You can compare arm32 with aarch64
 
+---------------------------------------
+
 ### <center>Arm 32</center>
+
+<center>
 
 |_Registers_| _Function_ |_Value saved during call_|
 |-----------|------------|-------------------------|
@@ -170,6 +177,8 @@ mul_add:
 |__r13(sp)__|stack pointer|__YES__|
 |__r14(lr)__|link register|__NO__|
 |__r15(pc)__|programme counter|__NO__|
+
+</center>
 
 - `pc` keeps the address of current running instruction
  
@@ -182,6 +191,8 @@ mul_add:
 - Function return value is in __r0__ or __r0-r1__
 
 - Function call can't change values of registers __r4-r11__, so if you want to use them in your function, you should save them on stack before using
+
+---------------------------------------
 
 ### How to write assembly programme
 
