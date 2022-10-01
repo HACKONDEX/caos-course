@@ -223,7 +223,7 @@ mul_add:
 
 - __`lt`__ **-** less than
 
-##### Examples
+##### Compare and branching example
 
 ```C
 %file compare.c
@@ -267,6 +267,45 @@ func:
 - __`str`__ save `str x0, [x1]` **-** save data from register `x0` in memory cell with address in register `x1`
 
 - __`adr`__ from relative address `adr x0, label` stores in register `x0` address of the `label`
- 
+
+#### Pointers and addresses example
+
+```C
+%file pointer.c
+
+#include <inttypes.h>
+
+char compare_and_exchange(int64_t* contained, int64_t* expected, int64_t value) {
+    if (*contained == *expected) {
+        *contained = value;
+        return 1;
+    }
+    *expected = *contained;
+    return 0;
+}
+```
+
+      aarch64-linux-gnu-gcc -S -Os pointer.c -o pointer.S
+
+```ASM
+	.text
+	.global	compare_and_exchange
+compare_and_exchange:
+	ldr	x3, [x0]
+	ldr	x4, [x1]
+	cmp	x3, x4
+	bne	.L2
+	str	x2, [x0]
+	mov	w0, 1
+
+.L3:
+	ret
+
+.L2:
+	mov	w0, 0
+	str	x3, [x1]
+	b	.L3
+```
+
 
 
