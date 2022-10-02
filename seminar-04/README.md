@@ -368,7 +368,7 @@ get:
 
 	ldr x0, [sp]         // scanf read value from stdin into 8 bytes on stack
                          // we load it into x0, as return value must be in x0 
-	ldr lr, [sp, 8]      // we return saved value of register lr
+	ldr lr, [sp, 8]      // we store saved on stack old value of register lr
 	add sp, sp, 16       // free allocated space on stack
 	ret
 
