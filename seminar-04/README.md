@@ -374,7 +374,7 @@ get:
 
 	.section .rodata     // section .rodata
 format_str:
-	.string "%ld"        // in final binary will be these char in same order
+	.string "%ld"        // in final binary will be these chars in the same order
 
 ```
 
