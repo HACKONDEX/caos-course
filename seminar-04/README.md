@@ -146,6 +146,8 @@ mul_add:
 
 </center>
 
+- We can use __lower 32 bits__ of the registers `x0-x30` operating with `w0-w30`, don't forget that in case you use `w$` the __significant 32 bits__ of `w$` can contain any value
+
 - `pc` keeps the address of current running instruction, isn't indexed register, has limited access 
  
 - `lr` holds the return address for a function call
