@@ -253,7 +253,7 @@ long long func(long long x, long long y) {
 ```
       aarch64-linux-gnu-gcc -S -Os compare.c -o compare.S
 
-```ASM
+```
 
 	.text
 	.global	func
@@ -300,7 +300,7 @@ char compare_and_exchange(int64_t* contained, int64_t* expected, int64_t value) 
 
       aarch64-linux-gnu-gcc -S -Os pointer.c -o pointer.S
 
-```ASM
+```
 	.text
 	.global	compare_and_exchange
 compare_and_exchange:
@@ -350,7 +350,7 @@ int64_t get_int64() {
 
 - Let's wrtie asm variant of this code
 
-```ASM
+```
 
 	.text
 	.global get          // define global function get
