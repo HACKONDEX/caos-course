@@ -319,6 +319,63 @@ compare_and_exchange:
 	str	x3, [x1]
 	b	.L3
 ```
+-----------------------
 
+## How to call a function in asm
+
+- As we already understood, to make a function we just write our code and put a label with the name of funtion at the beginnning of function
+
+- Last instruction of the funtion must be `ret`
+
+- To call a function we use `bl` instruction, as we alrdeady have label `func_name`, we just call using `bl func_name`
+
+- Before calling the function, we should store in registers `x0-x7` values of the arguments 
+
+- Also as `bl` changes value in register `lr` we must save its value on stack, and return the value from stack into register after function called
+
+### Example
+
+```C
+%file func_call.c
+
+#include <inttypes.h>
+#include <stdio.h>
+
+int64_t get_int64() {
+    int64_t var = 0;
+    scanf("%ld", &var);
+    return var;
+}
+```
+
+- Let's wrtie asm variant of this code
+
+```ASM
+
+	.text
+	.global get          // define global function get
+
+get:
+	sub sp, sp, 16       // allocate 16 bytes memory on stack(remeber about stack alignment 16)
+
+	str lr, [sp, 8]      // store value of register lr on stack
+
+	adr x0, format_str   // store char* in x0, as first argument of scanf is char*
+
+	mov x1, sp           // second argument should be int64_t*, as we already used
+                         // first 8 allocated on stack, rest 8 bytes we will use for int64_t
+	bl scanf             // call scanf
+
+	ldr x0, [sp]         // scanf read value from stdin into 8 bytes on stack
+                         // we load it into x0, as return value must be in x0 
+	ldr lr, [sp, 8]      // we return saved value of register lr
+	add sp, sp, 16       // free allocated space on stack
+	ret
+
+	.section .rodata     // section .rodata
+format_str:
+	.string "%ld"        // in final binary will be these char in same order
+
+```
 
 
