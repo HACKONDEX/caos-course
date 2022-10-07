@@ -7,7 +7,7 @@ int main() {
 	
 	scanf("%" PRId32, &signed_value);
 	scanf("%" PRIu32, &unsigned_value);
-
+	
 	++signed_value;
 	--unsigned_value;
 
