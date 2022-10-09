@@ -28,11 +28,13 @@
 2. Install qemu-arm if haven't got already
 
 ----
-      apt-get install qemu-system-arm
+      sudo apt-get install qemu-system-arm
 ----
-      apt-get install qemu-efi-aarch64
+      sudo apt-get install qemu-efi-aarch64
 ----
-      apt-get install qemu-utils
+      sudo apt-get install qemu-utils
+----
+      sudo apt install qemu-user
 
 3. If you have problems with compilation and execution, just search in google the error message. You will find solution for your problem in *99%* of cases.
 
