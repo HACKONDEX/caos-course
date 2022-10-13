@@ -56,4 +56,69 @@
 
 - __Stack__ must always be aligned with ___16___ bytes
 
+#### Compiler generated code example
+
+```C
+#include <inttypes.h>
+#include <stdio.h>
+
+int64_t calculate(int32_t a, int32_t b, int64_t x) {
+    return (a + b) * b + x;
+}
+
+int main() {
+    int32_t num = 0;
+    scanf("%" PRId32, &num);
+
+    int64_t result = calculate(num, 1, 0);
+
+    printf("%" PRId64 "\n", result);
+    return 0;
+}
+```
+
+- We will look at important code lines
+
+```
+	.intel_syntax noprefix
+	.text
+	.globl	calculate
+calculate:
+	endbr64
+	lea	eax, [rdi+rsi]
+	imul	eax, esi
+	cdqe
+	add	rax, rdx
+	ret
+
+.LC0
+	.string	"%d"
+.LC1:
+	.string	"%ld\n"
+
+	.globl	main
+main:
+.LFB24:
+	endbr64
+	sub	rsp, 24
+	lea	rdi, .LC0[rip]
+	xor	eax, eax
+	lea	rsi, 4[rsp]
+	mov	DWORD PTR 4[rsp], 0
+	call	__isoc99_scanf@PLT
+	mov	eax, DWORD PTR 4[rsp]
+	mov	edi, 1
+	lea	rsi, .LC1[rip]
+	lea	edx, 1[rax]
+	xor	eax, eax
+	movsx	rdx, edx
+	call	__printf_chk@PLT
+	mov	rax, QWORD PTR 8[rsp]
+	jne	.L6
+	xor	eax, eax
+	add	rsp, 24
+	ret
+
+```
+
 
