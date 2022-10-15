@@ -60,6 +60,16 @@
 
 ---------------------------------------------
 
+- `movsx rax, WORD PTR [rsp]` __-__ loading 1 byte from memory with sign-extension
+
+- `movsxd rax, WORD PTR [rsp]` __-__ loading 2 bytes from memory with sign-extension
+
+- `movsxd rax, DWORD PTR [rsp]` __-__ loading 4 bytes from memory with sign-extension
+
+- `mov rax, QWORD PTR [rsp]` __-__ loading 8 bytes from memory
+
+----------------------------------------------
+
 #### Compiler generated code example
 
 ```C
