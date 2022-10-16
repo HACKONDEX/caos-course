@@ -5,8 +5,6 @@
 
 very_important_function:
 
-	endbr64
-
 	push   r12  
 	mov    r12, 0                    //  i == r12 = 0 
 
@@ -24,7 +22,7 @@ very_important_function:
 
     call   scanf                     //  call scanf
 
-	movsxd rsi, [rsp]                //  load into `rsi` int32_t value from stack
+	movsxd rsi, DWORD PTR [rsp]                //  load into `rsi` int32_t value from stack
     mov    rcx, A[rip]               //  load into `rcx` address of A
 
 	movsxd rcx, [rcx + 4 * r12]      //  load into `rcx` *(A + i * 4)
