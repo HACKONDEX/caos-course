@@ -1,5 +1,9 @@
 # __ASM x86-64__
 
+[x86-64 Instructions](https://www.felixcloutier.com/x86/)
+
+[Yakovlev's reading](https://github.com/victor-yacovlev/fpmi-caos/tree/master/practice/x86-64)
+
 - x86-64 is another processor architecture
 
 - Assembly code for this architecture has two syntaxes `AT&T` and `intel`, we will use `intel` syntax
@@ -91,49 +95,9 @@ int main() {
 }
 ```
 
-- We will look at important code lines
+- We will look at important code lines [here](examples/disasm_example.S)
 
-```
-	.intel_syntax noprefix
-	.text
-	.globl	calculate
-calculate:
-	endbr64
-	lea	eax, [rdi+rsi]
-	imul	eax, esi
-	cdqe
-	add	rax, rdx
-	ret
 
-.LC0
-	.string	"%d"
-.LC1:
-	.string	"%ld\n"
-
-	.globl	main
-main:
-.LFB24:
-	endbr64
-	sub	rsp, 24
-	lea	rdi, .LC0[rip]
-	xor	eax, eax
-	lea	rsi, 4[rsp]
-	mov	DWORD PTR 4[rsp], 0
-	call	__isoc99_scanf@PLT
-	mov	eax, DWORD PTR 4[rsp]
-	mov	edi, 1
-	lea	rsi, .LC1[rip]
-	lea	edx, 1[rax]
-	xor	eax, eax
-	movsx	rdx, edx
-	call	__printf_chk@PLT
-	mov	rax, QWORD PTR 8[rsp]
-	jne	.L6
-	xor	eax, eax
-	add	rsp, 24
-	ret
-
-```
 ----------------------------------------------------------
 
 - Let's solve task 5-0
@@ -167,8 +131,6 @@ void very_important_function(size_t N) {
 
 very_important_function:
 
-	endbr64
-
 	push   r12  
 	mov    r12, 0                    //  i == r12 = 0 
 
@@ -186,7 +148,7 @@ very_important_function:
 
     call   scanf                     //  call scanf
 
-	movsxd rsi, [rsp]                //  load into `rsi` int32_t value from stack
+	movsxd rsi, DWORD PTR [rsp]      //  load into `rsi` int32_t value from stack
     mov    rcx, A[rip]               //  load into `rcx` address of A
 
 	movsxd rcx, [rcx + 4 * r12]      //  load into `rcx` *(A + i * 4)
@@ -213,7 +175,6 @@ very_important_function:
     .string "%d"
 .fmt_printf:
     .string "%lld\n"
-
 ```
 
 
