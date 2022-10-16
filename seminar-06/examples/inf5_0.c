@@ -9,6 +9,6 @@ void very_important_function(size_t N) {
         scanf("%d", &num);
         int64_t result = num;
         result *= A[i];
-        printf("%d\n", result);
+        printf("%" PRId64 "\n", result);
     }    
 }
