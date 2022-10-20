@@ -4,9 +4,9 @@
 
 - Registers `xmm0-xmm7` with size ___128___ bits
 
-- (Special avx instructions for asm)[https://docs.oracle.com/cd/E36784_01/html/E36859/gntbd.html]
+- [AVX instructions for asm](https://docs.oracle.com/cd/E36784_01/html/E36859/gntbd.html)
 
-- (AVX official documentation)[https://www.laruence.com/sse/#techs=AVX,AVX2]
+- [Official intrices documentation](https://www.laruence.com/sse/#techs=AVX,AVX2)
 
 ## examples
 
@@ -92,7 +92,7 @@ very_important_function:
 
     addps    xmm0, xmm1                         //  add packed floats from `xmm1` to `xmm0`    
     
-    add      rax, 4                             //  i +=4
+    add      rax, 4                             //  i += 4
     jmp      .loop_begin    
     
 .loop_end:
@@ -100,6 +100,56 @@ very_important_function:
     haddps   xmm0, xmm0                         //  horizontal add packed-floats
     haddps   xmm0, xmm0                         //  horiznotal add packed-floats
     cvtss2sd xmm0, xmm0                         //  converts float to double 
+
+    cvtsi2sd xmm1, rdi                          //  converts doubleword integer to double
+    divsd    xmm0, xmm1                         //  divides scalar double values
+
+    ret                                         // return value should be in xmm0
+```
+
+- If the process supports AVX-2 than we can use `ymm0-ymm16` larger registers with size ___256___ its
+
+```
+    .intel_syntax noprefix
+
+    .text
+    .global very_important_function
+
+very_important_function:
+    endbr64
+    //       rdi = N
+    //       rsi = float *A
+    //       rdx = float *B
+    //       rcx = float *R
+
+    vpxor    ymm0, ymm0, ymm0                  //  sum == xmm0 = 0
+    mov      rax, 0                            //  i == rax = 0
+
+.loop_begin:
+
+    cmp      rax, rdi                           //  if (i >= N)
+    jae      .loop_end                          //  break
+
+    vmovaps   ymm1, YMMWORD PTR [rsi + rax * 4]
+    vmovaps   ymm2, YMMWORD PTR [rdx + rax * 4]
+    vaddps    ymm1, ymm1, ymm2  
+
+    vmovaps   YMMWORD PTR [rcx + rax * 4], ymm1
+
+    addps    xmm0, XMMWORD PTR [rcx + rax * 4]
+    mov       r8, rax
+    add       r8, 4
+    addps    xmm0, XMMWORD PTR [rcx + r8 * 4]
+    
+    add      rax, 8                             //  i += 8
+    jmp      .loop_begin    
+    
+.loop_end:
+
+    haddps   xmm0, xmm0                         //  horizontal add packed-floats
+    haddps   xmm0, xmm0                         //  horiznotal add packed-floats
+
+    cvtss2sd xmm0, xmm0
 
     cvtsi2sd xmm1, rdi                          //  converts doubleword integer to double
     divsd    xmm0, xmm1                         //  divides scalar double values
