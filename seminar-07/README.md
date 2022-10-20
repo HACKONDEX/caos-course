@@ -12,7 +12,7 @@
 
 ### Task inf-I-06-0: asm-x86/avx/intro
 
-- Solution in the language C
+- Solution in the `C` language
 
 ```C
 #include <stdio.h>
@@ -107,7 +107,7 @@ very_important_function:
     ret                                         // return value should be in xmm0
 ```
 
-- If the process supports AVX-2 than we can use `ymm0-ymm16` larger registers with size ___256___ its
+- If the processes supports AVX-2 than we can use `ymm0-ymm16` larger registers with size ___256___ bits
 
 ```
     .intel_syntax noprefix
