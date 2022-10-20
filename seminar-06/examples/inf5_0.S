@@ -1,34 +1,35 @@
-	.intel_syntax noprefix
+    .intel_syntax noprefix
 
-	.text                                  
-	.globl very_important_function 
+    .extern A
+    .text                                  
+    .globl very_important_function 
 
 very_important_function:
 
-	push   r12  
-	mov    r12, 0                    //  i == r12 = 0 
+    push   r12  
+    mov    r12, 0                    //  i == r12 = 0 
 
     push   r13 
-	mov    r13, rdi			         //  r13 = N
+    mov    r13, rdi			         //  r13 = N
 
-	sub    rsp, 8                    //  allocate 8 bytes on stack
+    sub    rsp, 8                    //  allocate 8 bytes on stack
 
 .loop_begin:
-	cmp    r12, r13                  //  if (i >= N) 
-	jae    .loop_end                 //  break
+    cmp    r12, r13                  //  if (i >= N) 
+    jae    .loop_end                 //  break
 
-	lea    rdi, .fmt_scanf[rip]      //  load into `rdi` char* "%d"
+    lea    rdi, .fmt_scanf[rip]      //  load into `rdi` char* "%d"
     mov    rsi, rsp                  //  load into `rsi` pointer to int32_t on stack
 
     call   scanf                     //  call scanf
 
-	movsxd rsi, DWORD PTR [rsp]      //  load into `rsi` int32_t value from stack
+    movsxd rsi, DWORD PTR [rsp]      //  load into `rsi` int32_t value from stack
     mov    rcx, A[rip]               //  load into `rcx` address of A
 
-	movsxd rcx, [rcx + 4 * r12]      //  load into `rcx` *(A + i * 4)
+    movsxd rcx, [rcx + 4 * r12]      //  load into `rcx` *(A + i * 4)
     imul   rsi, rcx                  //  store in `rax` value of (rsi * rcx)
 
-	lea    rdi, .fmt_printf[rip]     //  load into `rdi` char* "%lld\n"
+    lea    rdi, .fmt_printf[rip]     //  load into `rdi` char* "%lld\n"
 
     call   printf                    // call printf
 
@@ -37,14 +38,14 @@ very_important_function:
 
 
 .loop_end:
-	add    rsp, 8                    // free allocated stack memory
+    add    rsp, 8                    // free allocated stack memory
 
     pop    r13                       // restore saved on stack value of `r13` 
     pop    r12                       // restore saved on stack value of `r12`
 
-	ret
+    ret
 
-	.section .rodata
+    .section .rodata
 .fmt_scanf:
     .string "%d"
 .fmt_printf:
