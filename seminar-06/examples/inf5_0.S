@@ -10,7 +10,7 @@ very_important_function:
     mov    r12, 0                    //  i == r12 = 0 
 
     push   r13 
-    mov    r13, rdi			         //  r13 = N
+    mov    r13, rdi                  //  r13 = N
 
     sub    rsp, 8                    //  allocate 8 bytes on stack
 
