@@ -1,5 +1,7 @@
 # __x86-64__  __AVX__
 
+- ___NOTE___ testing system of [ejudge](https://ejudge.atp-fivt.org) is `Fedor`, and it doesn't use `ASLR`. If you are using `Ubuntu` than you should compile with option `-no-pie`.
+
 - Large registers for floating point numbers
 
 - Registers `xmm0-xmm7` with size ___128___ bits
@@ -107,7 +109,7 @@ very_important_function:
     ret                                         // return value should be in xmm0
 ```
 
-- If the processes supports AVX-2 than we can use `ymm0-ymm16` larger registers with size ___256___ bits
+- If the processes supports AVX-2 than we can use `ymm0-ymm15` larger registers with size ___256___ bits
 
 ```
     .intel_syntax noprefix
@@ -155,4 +157,115 @@ very_important_function:
     divsd    xmm0, xmm1                         //  divides scalar double values
 
     ret                                         // return value should be in xmm0
+```
+
+---------------------------
+
+### Another example
+
+```C
+#include <inttypes.h>
+#include <stdio.h>
+
+#define N 4
+
+int main() {
+    float a[N] = {0, 0, 0, 0};
+    float b[N] = {1.5, 2.5, 3.5, 4.5};
+
+    double sum = 0.0;
+
+    for (size_t i = 0; i < N; ++i) {
+        scanf("%f", &a[i]);
+        a[i] *= b[i];
+
+        if (i != 0) {
+            a[i] /= i;
+        }
+        sum += a[i];
+    }
+
+    printf("%f\n", sum);
+    return 0;
+}
+```
+
+- My asm code of code above
+
+```
+    .intel_syntax noprefix
+
+    .text
+    .global main
+
+main:
+    endbr64
+    push     rbx
+    sub      rsp, 32                           // allocate 16 bytes on stack
+    
+
+    pxor     xmm0, xmm0                        //  sum == xmm0 = 0
+    mov      rbx, 0                            //  i == rbx = 0
+
+.loop_begin:
+
+    cmp      rbx, 4                            //  if (i >= 4)
+    jae      .loop_end                         //  break
+
+    vmovsd   QWORD PTR [rsp + 16], xmm0        //  store low double from `xmm0` on stack
+    lea      rdi, .scanf_fmt_str[rip]          //  load char*
+
+    mov      rsi, rbx                          //  rsi = i
+    imul     rsi, 4                            //  rsi == i * 4
+    add      rsi, rsp                          //  rsi == rsp + i * 4
+
+    call scanf                                 // call scanf("%f", &a[i])
+
+    vmovsd   xmm0, QWORD PTR [rsp + 16]                    //  xmm0 == sum
+    vmovss   xmm1, DWORD PTR [rsp + rbx * 4]
+    movupd   xmm2, XMMWORD PTR [.label_array_b + rbx * 8]  //  load double b[i]
+    cvtsd2ss xmm2, xmm2                                    //  cast double to float
+    mulss    xmm1, xmm2                                    //  a[i] *= b[i]
+    
+    
+    cmp rbx, 0                                 //  if (i != 0)
+    je .end_divide
+
+.divide:
+    cvtsi2ss xmm2, rbx                         //  cast `i` to float
+    divss    xmm1, xmm2                        //  a[i] /= i;
+
+.end_divide:
+
+    cvtss2sd xmm1, xmm1                        //  cast float to double
+    addsd    xmm0, xmm1                        //  sum += a[i]
+    add      rbx, 1                            //  ++i
+    jmp      .loop_begin
+
+.loop_end:
+
+
+    lea      rdi, .printf_fmt_str[rip]         // load cahr* "%f\n"
+
+    call printf                                // printf("%f\n", sum)
+
+    mov      rax, 0
+    add      rsp, 32
+    pop      rbx
+
+    ret                                         
+
+
+.section .data
+.label_array_b:
+    .double 1.5
+    .double 2.5
+    .double 3.5
+    .double 4.5
+
+.section .rodata
+.scanf_fmt_str:
+    .string "%f"
+.printf_fmt_str:
+    .string "%f\n"
 ```
