@@ -10,8 +10,6 @@
 
 - [AVX instructions for asm](https://docs.oracle.com/cd/E36784_01/html/E36859/gntbd.html)
 
-- [Official intrices documentation](https://www.laruence.com/sse/#techs=AVX,AVX2)
-
 ## examples
 
 ### Task inf-I-06-0: asm-x86/avx/intro
