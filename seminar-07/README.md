@@ -1,6 +1,8 @@
 # __x86-64__  __AVX__
 
-- ___NOTE___ testing system of [ejudge](https://ejudge.atp-fivt.org) is `Fedor`, and it doesn't use `ASLR`. If you are using `Ubuntu` than you should compile with option `-no-pie`.
+- ___NOTE___ testing system of [ejudge](https://ejudge.atp-fivt.org) is `Fedora`, and it doesn't use `ASLR`. If you are using `Ubuntu` than you should compile with option `-no-pie`.
+
+--------------------------------------------
 
 - Large registers for floating point numbers
 
@@ -268,4 +270,48 @@ main:
     .string "%f"
 .printf_fmt_str:
     .string "%f\n"
+```
+-------------------
+## AVX in __C__
+
+- If we have float and double arrays or want to speed up calculations for integer arrays, than we can use large `xmm`, `ymm`, `zmm` registers from __`C`__ code too.
+
+- You need to inlcude `#include <immintrin.h>` and compile with _option_ __`-mavx`__
+
+- That will give you opportunity to use all `AVX` instructions. You can find funtions and types [documentation here](https://www.laruence.com/sse/#techs=AVX,AVX2,AVX_512&text=__m256d)
+
+- Let's look at an example
+
+```C
+#include <immintrin.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+const size_t N = 8;
+
+int main() {
+    double a[8] = {11.1, 22.2, 33.3, 77.7, 11.1, 11.1, 11.1, 11.1};
+    double* b = calloc(N, sizeof(double));
+    for (size_t i = 0; i < N; ++i) {
+        scanf("%lf", &b[i]);
+    }
+
+    __m256d pack_a = _mm256_loadu_pd(a);
+    __m256d pack_b = _mm256_loadu_pd(b);
+
+    pack_b = _mm256_mul_pd(pack_a, pack_b);
+    _mm256_storeu_pd(b, pack_b);
+
+    pack_b = _mm256_loadu_pd(b + 2);
+    pack_b = _mm256_add_pd(pack_a, pack_b);
+
+    _mm256_storeu_pd(b + 2, pack_b);
+
+    for (size_t i = 0; i < N; ++i) {
+        printf("%lf ", b[i]);
+    }
+
+    return 0;
+}
 ```
