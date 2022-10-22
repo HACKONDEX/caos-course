@@ -51,6 +51,7 @@ main:
 
 
     lea      rdi, .printf_fmt_str[rip]         // load cahr* "%f\n"
+
     call printf                                // printf("%f\n", sum)
 
     mov      rax, 0
