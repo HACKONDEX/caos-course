@@ -11,5 +11,5 @@ void _start() {
 
     syscall(__NR_write, 1, buffer, read_count);
 
-    syscall(__NR_exit, 0);
+    syscall(__NR_exit_group, 0);
 }
