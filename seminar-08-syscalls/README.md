@@ -8,13 +8,13 @@ Syscall gives the programm ability to interact with the operating system and req
 
 [Yakovlev's reading](https://github.com/victor-yacovlev/fpmi-caos/tree/master/practice/asm/nostdlib_baremetal)
 
-[Articles about intteruption](https://0xax.gitbooks.io/linux-insides/content/Interrupts/index.html)
+[Articles about intteruptions](https://0xax.gitbooks.io/linux-insides/content/Interrupts/index.html)
 
-[System calls more theory](https://0xax.gitbooks.io/linux-insides/content/SysCall/linux-syscall-1.html)
+[System calls: more theory](https://0xax.gitbooks.io/linux-insides/content/SysCall/linux-syscall-1.html)
 
 ## Syscalls in code
 
-- In `stdlibc` there is `unistd.h` header with syscall functions. Which are wrappers for kernel syscalsl. Wrappers just organize syscall number and arguments in other words give good interface for making syscalls.
+- In `stdlibc` there is `unistd.h` header with syscall functions. Which are wrappers for kernel syscalls. Wrappers just organize syscall number and arguments in other words give good interface for making syscalls.
 
 #### Example
 
@@ -59,7 +59,7 @@ _start:
 str: .string "Hellow!\n"
 ```
 
-- The is header file `asm/unistd_64.h` where we have definitions for syscall numbers, we should use them instead of bare numbers
+- There is header a file `asm/unistd_64.h` where we have definitions for syscall numbers, we should use them instead of bare numbers
 
 - You can get acquainted [with syscalls here](https://filippo.io/linux-syscall-table/)
 
@@ -74,5 +74,33 @@ void _start() {
 ```
 
 -------
+
+## Syscall read and write
+
+- `read` __-__ syscall to get content of files, pipes, terminal, fifo-pipes, sockets and etc. Returns the amount of bytes read from file-descriptor and `-1` if there was an error.
+
+- `write` __-__ syscall to wrtie bytes into files, pipes, terminal, fifo-pipes, sockets and etc. Returns successfuly wrtitten bytes count and `-1` if there was an error
+
+- Open `man 2 read` and `man 2 write` for more details
+
+#### Example
+
+```C
+#include <asm/unistd_64.h>
+
+typedef enum {
+    BUFFER_SIZE = 256,
+} constant_t;
+
+void _start() {
+    char buffer[BUFFER_SIZE];
+
+    int read_count = syscall(__NR_read, 0, buffer, BUFFER_SIZE);
+
+    syscall(__NR_write, 1, buffer, read_count);
+
+    syscall(__NR_exit, 0);
+}
+```
 
 
