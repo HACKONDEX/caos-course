@@ -9,3 +9,6 @@ hellow_seg:
 
 hellow:
 	@ gcc -nostdlib example_hello_world.c syscall.S -o hellow.exe
+
+clear:
+	@ rm *.exe
