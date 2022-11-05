@@ -13,5 +13,8 @@ hellow:
 brk:
 	@ gcc -m64 -masm=intel syscall.S brk.c -o brk.exe  
 
+brk_nostdlib:
+	@ gcc -m64 -masm=intel -nostdlib syscall.S brk_nostdlib.c -o brk_nostdlib.exe
+
 clear:
 	@ rm *.exe
