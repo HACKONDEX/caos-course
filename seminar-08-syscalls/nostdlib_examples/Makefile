@@ -10,5 +10,8 @@ hellow_seg:
 hellow:
 	@ gcc -nostdlib example_hello_world.c syscall.S -o hellow.exe
 
+brk:
+	@ gcc -m64 -masm=intel syscall.S brk.c -o brk.exe  
+
 clear:
 	@ rm *.exe
