@@ -3,8 +3,6 @@
 #include <stdint.h>
 
 int64_t syscall(int64_t code, ...);
-
-
 // __asm__(R"(
 // syscall:
 //     push r9
