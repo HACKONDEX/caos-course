@@ -9,7 +9,7 @@ _start:
     mov rcx, 8
     call syscall
     mov rdi, 60
-    mov rsi, 1
+    mov rsi, 0
     call syscall
 
 
