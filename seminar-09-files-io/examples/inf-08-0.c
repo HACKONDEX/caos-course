@@ -53,8 +53,10 @@ int main(int argc, char *argv[]) {
 
     while (is_open) {
         int32_t read_bytes = read(input_fd, buffer, kMaxSize);
-        if (read_bytes <= 0) {
+        if (read_bytes == 0) {
             break;
+        } else if (read_bytes < 0) {
+            goto io_error;
         }
         numbers_len = 0;
         remains_len = 0;
