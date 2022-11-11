@@ -115,3 +115,16 @@ exit:
     _exit(ret);
 }
 ```
+
+### lseek
+
+- `off_t lseek(int fildes, off_t offset, int whence);`
+  
+- `fildes` - is the file descriptor
+
+- `offset` - is the offset in bytes regarding `whence`
+
+- `whence` - have only __3__ validate values 
+   1. `SEEK_SET` - The offset is set to `offset` bytes from the beginning of the file
+   2. `SEEK_CUR` - The offset is set as the current offset plus `offset` bytes
+   3. `SEEK_END` - The offset is set as the file size plus `offset` bytes
