@@ -22,6 +22,9 @@ bool write_file(int fd, char* buffer, int32_t size) {
     return true;
 }
 
+bool check_capacity(int32_t buffer_len) {
+    return buffer_len == kMaxSize;
+}
 
 int main(int argc, char *argv[]) {
     assert(argc == 4);
@@ -61,15 +64,27 @@ int main(int argc, char *argv[]) {
         numbers_len = 0;
         remains_len = 0;
         for (size_t i = 0; i < read_bytes; ++i) {
+            if (check_capacity(numbers_len)) {
+                if (!write_file(numbers_fd, numbers, numbers_len)) {
+                    goto io_error;
+                }   
+            }
+            if (check_capacity(remains_len)) {
+                if (!write_file(remains_fd, remains, remains_len)) {
+                    goto io_error;
+                }
+            }
             if (isdigit(buffer[i])) {
                 numbers[numbers_len++] = buffer[i];
                 continue;
             }
             remains[remains_len++] = buffer[i];
         }
+
         if (!write_file(numbers_fd, numbers, numbers_len)) {
             goto io_error;
-        }
+        }   
+       
         if (!write_file(remains_fd, remains, remains_len)) {
             goto io_error;
         }
