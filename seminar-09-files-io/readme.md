@@ -200,7 +200,7 @@ int main() {
 // #include </usr/share/mingw-w64/include/winbase.h>
 
 int main() {
-     HANDLE fileHandle = CreateFileA(argv[1], GENERIC_READ, FILE_SHARE_READ, NULL,
+    HANDLE fileHandle = CreateFileA(argv[1], GENERIC_READ, FILE_SHARE_READ, NULL,
         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
     DWORD bytes_read;
@@ -216,6 +216,13 @@ int main() {
     success = SetFilePointerEx(fileHandle, offset, NULL, FILE_BEGIN);
 
     CloseHandle(fileHandle);
+    return 0;
 }
 ```
+
+- Compile and run example
+
+- `i686-w64-mingw64-gcc windows_example.c -o win.exe`
+  
+- `WINEDEBUG=-all wine winapi_example.exe file.txt`
 
