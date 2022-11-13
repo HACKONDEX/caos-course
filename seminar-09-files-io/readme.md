@@ -224,5 +224,5 @@ int main() {
 
 - `i686-w64-mingw64-gcc windows_example.c -o win.exe`
   
-- `WINEDEBUG=-all wine winapi_example.exe file.txt`
+- `WINEDEBUG=-all wine win.exe file.txt`
 
