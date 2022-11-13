@@ -183,3 +183,39 @@ int main() {
     return 0;
 }
 ```
+
+# files-io on Windows 
+
+- We will need windows gcc compiler, and executor for widows code
+
+- `sudo apt install gcc-mingw-w64` __-__ install compiler
+
+- `sudo apt install wine64` __-__ install executor
+
+```C
+#include <windows.h>
+#include <stdio.h>
+#include <assert.h>
+#include <inttypes.h>
+// #include </usr/share/mingw-w64/include/winbase.h>
+
+int main() {
+     HANDLE fileHandle = CreateFileA(argv[1], GENERIC_READ, FILE_SHARE_READ, NULL,
+        OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+    DWORD bytes_read;
+    BOOL success;
+
+    char buffer[256];
+
+    success = ReadFile(fileHandle, buffer, 5,
+                           &bytes_read, NULL);
+
+    LARGE_INTEGER offset;
+    offset.QuadPart = 11;
+    success = SetFilePointerEx(fileHandle, offset, NULL, FILE_BEGIN);
+
+    CloseHandle(fileHandle);
+}
+```
+
