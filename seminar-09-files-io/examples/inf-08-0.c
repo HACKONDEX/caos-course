@@ -61,18 +61,18 @@ int main(int argc, char *argv[]) {
         } else if (read_bytes < 0) {
             goto io_error;
         }
-        numbers_len = 0;
-        remains_len = 0;
         for (size_t i = 0; i < read_bytes; ++i) {
             if (check_capacity(numbers_len)) {
                 if (!write_file(numbers_fd, numbers, numbers_len)) {
                     goto io_error;
-                }   
+                }
+                numbers_len = 0;   
             }
             if (check_capacity(remains_len)) {
                 if (!write_file(remains_fd, remains, remains_len)) {
                     goto io_error;
                 }
+                remains_len = 0;
             }
             if (isdigit(buffer[i])) {
                 numbers[numbers_len++] = buffer[i];
@@ -80,17 +80,16 @@ int main(int argc, char *argv[]) {
             }
             remains[remains_len++] = buffer[i];
         }
+    }
 
-        if (!write_file(numbers_fd, numbers, numbers_len)) {
+    if (!write_file(numbers_fd, numbers, numbers_len)) {
             goto io_error;
         }   
        
-        if (!write_file(remains_fd, remains, remains_len)) {
-            goto io_error;
-        }
-
+    if (!write_file(remains_fd, remains, remains_len)) {
+        goto io_error;
     }
-     
+    
 
 
 
