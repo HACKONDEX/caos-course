@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 		printf("File is symbolic link\n");
 	}
 
-    if ((attrs.st_mode & S_IRUSR) == S_IRUSR) {
+    if ((attrs.st_mode & S_IXUSR) == S_IXUSR) {
         printf("Is executable\n");
     }
 
