@@ -17,7 +17,7 @@ void zero_terminate(char *str) {
 }
 
 int main() {
-    char *file_name = calloc(PATH_MAX, sizeof(char));
+    char *file_name = calloc(PATH_MAX, sizeof(char));   
     int64_t size = 0;
     struct stat attrs;
 
